@@ -1,0 +1,15 @@
+{
+  "name": "electron-rpc-client",
+  "description": "Electron RPC Client library",
+  "author": "Alexander Sychev",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "dependencies": {
+    "electron-rpc-types": "1.0.0",
+    "electron-rpc-channels-names-resolver": "1.0.0",
+    "uuid": "3.3.2",
+    "tslib": "1.9.3"
+  }
+}

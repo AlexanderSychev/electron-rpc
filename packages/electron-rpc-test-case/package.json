@@ -1,0 +1,10 @@
+{
+  "name": "electron-rpc-test-case",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "electron-rpc-client": "1.0.0",
+    "electron-rpc-server": "1.0.0"
+  }
+}
