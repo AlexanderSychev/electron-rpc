@@ -1,5 +1,11 @@
 {
   "name": "electron-rpc-types",
+  "author": "Alexander Sychev",
+  "description": "Common TypeScript types for Electron RPC packages",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AlexanderSychev/electron-rpc.git"
+  },
   "version": "1.0.0",
   "main": "index.js",
   "types": "index.d.ts",

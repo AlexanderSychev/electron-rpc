@@ -1,5 +1,11 @@
 {
   "name": "electron-rpc-channels-names-resolver",
+  "author": "Alexander Sychev",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AlexanderSychev/electron-rpc.git"
+  },
+  "description": "Utilities for Electron RPC library",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

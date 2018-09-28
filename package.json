@@ -1,6 +1,12 @@
 {
   "name": "electron-rpc",
+  "author": "Alexander Sychev",
+  "description": "Remote Procedure Call (RPC) Protocol for Electron IPC",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AlexanderSychev/electron-rpc.git"
+  },
   "scripts": {
     "build": "gulp",
     "start": "electron ./packages/electron-rpc-test-case"

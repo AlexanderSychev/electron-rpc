@@ -1,5 +1,10 @@
 {
   "name": "electron-rpc-client",
+  "author": "Alexander Sychev",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AlexanderSychev/electron-rpc.git"
+  },
   "description": "Electron RPC Client library",
   "author": "Alexander Sychev",
   "version": "1.0.0",

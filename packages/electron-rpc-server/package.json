@@ -1,5 +1,11 @@
 {
   "name": "electron-rpc-server",
+  "author": "Alexander Sychev",
+  "description": "Electron RPC Server",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AlexanderSychev/electron-rpc.git"
+  },
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",

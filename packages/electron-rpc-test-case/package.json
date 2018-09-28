@@ -1,5 +1,11 @@
 {
   "name": "electron-rpc-test-case",
+  "author": "Alexander Sychev",
+  "description": "Test application for Electron RPC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AlexanderSychev/electron-rpc.git"
+  },
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
