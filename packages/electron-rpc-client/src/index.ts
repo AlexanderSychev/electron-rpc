@@ -39,13 +39,17 @@ export class Client {
     /** Common request method */
     public request<A extends any[] = [], R = void>({ procedure, ...rest }: RequestParams<A>): Promise<R> {
         const uuid: string = v4();
-        const type: EnvelopeType = isNil(rest.type) ? EnvelopeType.BLOCKING : rest.type;
+        const type: EnvelopeType = isNil(rest.type) ? EnvelopeType.BLOCKING : rest.type!;
         const args: A = isNil(rest.args) ? <any>[] : rest.args;
         const request: Request<A> = { type, procedure, args, uuid };
         return new Promise<R>((resolve, reject) => {
-            this.ipcRenderer.on(this.rpcResponseChannelName, (response: Response<R>) => {
-                if (response.uuid === uuid) {
-                    resolve(response.result);
+            this.ipcRenderer.on(this.rpcResponseChannelName, ({ uuid: resUuid, result, error }: Response<R>) => {
+                if (uuid === resUuid) {
+                    if (!isNil(error)) {
+                        reject(error);
+                    } else {
+                        resolve(result!);
+                    }
                 }
             });
             this.ipcRenderer.send(this.rpcRequestChannelName, request);

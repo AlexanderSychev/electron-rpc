@@ -53,5 +53,8 @@ export interface Request<A extends any[] = []> extends Envelope {
 
 /** Response */
 export interface Response<R = void> extends Envelope {
-    result: R;
+    /** Response result */
+    result: R | null | undefined;
+    /** Response error */
+    error: string | null | undefined;
 }

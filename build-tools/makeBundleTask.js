@@ -20,8 +20,7 @@ const makeBundleTask = ({ entryPoint, outDir, jsFileName }) => (cb) => {
             output: {
                 path: outDir,
                 filename: jsFileName,
-                library: 'ElectronRPCClient',
-                libraryExport: 'Client'
+                library: 'ElectronRPC'
             },
             module: {
                 rules: [

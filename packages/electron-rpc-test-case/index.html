@@ -5,8 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Electron RPC Test Case</title>
+        <script src="../electron-rpc-client/lib/index.js"></script>
+        <script src="./app.js"></script>
+        <style>
+            button {
+                display: block;
+            }
+        </style>
     </head>
     <body>
-        
+        <button id="blocking">
+            <h1>blocking</h1>
+        </button>
+        <button id="nonblocking">
+            <h1>nonblocking</h1>
+        </button>
     </body>
 </html>
