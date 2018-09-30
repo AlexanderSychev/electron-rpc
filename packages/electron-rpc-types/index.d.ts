@@ -1,6 +1,6 @@
 /** Common RPC incoming envelopes resolver */
 export interface Resolver {
-    [name: string]: <A extends any[] = [], R = void>(...args: A) => R | Promise<R>;
+    [name: string]: (...args: any[]) => any;
 }
 
 /** Default names of RPC channel */

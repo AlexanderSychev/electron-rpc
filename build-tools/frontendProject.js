@@ -35,7 +35,7 @@ module.exports = (packageName) => {
     gulp.task(bundleTask, makeBundleTask({
         entryPoint: path.join(srcDir, 'index.ts'),
         outDir: distDir,
-        jsFileName: 'index.js'
+        jsFileName: `${packageName}.min.js`
     }));
     gulp.task(typesTask, makeCompileTask(srcDir, distDir, TS_CONFIG_PATH));
     gulp.task(buildTask, [bundleTask, typesTask]);

@@ -39,6 +39,9 @@ const makeBundleTask = ({ entryPoint, outDir, jsFileName, library }) => (cb) => 
             },
             resolve: {
                 extensions: ['.tsx', '.ts', '.js', '.json']
+            },
+            optimization: {
+                minimize: true
             }
         },
         (err, stats) => {

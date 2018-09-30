@@ -1,9 +1,7 @@
-'use strict'
+import { app, BrowserWindow, ipcMain } from 'electron';
+import { Server } from 'electron-rpc-server';
 
-const { app, BrowserWindow, ipcMain } = require('electron');
-const { Server } = require('electron-rpc-server');
-
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 
 const server = new Server(ipcMain, {
     nonblocking: async () => {
@@ -18,9 +16,9 @@ const server = new Server(ipcMain, {
     }
 });
 
-let win;
+let win: BrowserWindow | null = null;
 
-function createWindow () {
+function createWindow() {
     win = new BrowserWindow({ width: 800, height: 600 });
     server.start();
 

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Document
+        script.
+            window.__electron__ = require('electron');
+        script(src='./electron-ipc.min.js')
+        script(src="./app.js")
+    body
+        button#blocking
+            h1 blocking
+        button#nonblocking
+            h1 nonblocking
