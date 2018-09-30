@@ -1,5 +1,5 @@
 import autobind from 'autobind-decorator';
-import { Event, IpcMain } from 'electron';
+import { Event, IpcMain, IpcRenderer } from 'electron';
 import { Resolver, ChannelsNamesParameters, Request, EnvelopeType, Response } from 'electron-rpc-types';
 import { resolve, isNil } from 'electron-rpc-channels-names-resolver';
 
@@ -16,23 +16,27 @@ export class Server {
     /** Blocking requests queue */
     private queue: TaskQueue;
     /** Main process IPC bus */
-    private ipcMain: IpcMain;
+    private bus: IpcMain | IpcRenderer;
     /** @constructor */
-    public constructor(ipcMain: IpcMain, resolver: Resolver, channels?: ChannelsNamesParameters | null | undefined) {
+    public constructor(
+        bus: IpcMain | IpcRenderer,
+        resolver: Resolver,
+        channels?: ChannelsNamesParameters | null | undefined,
+    ) {
         const { rpcRequestChannelName, rpcResponseChannelName } = resolve(channels);
         this.rpcRequestChannelName = rpcRequestChannelName;
         this.rpcResponseChannelName = rpcResponseChannelName;
         this.resolver = resolver;
-        this.ipcMain = ipcMain;
+        this.bus = bus;
         this.queue = new TaskQueue();
     }
     /** Start server */
     public start(): void {
-        this.ipcMain.on(this.rpcRequestChannelName, this.onRequest);
+        this.bus.on(this.rpcRequestChannelName, this.onRequest);
     }
     /** Stop server */
     public stop(): void {
-        this.ipcMain.removeListener(this.rpcRequestChannelName, this.onRequest);
+        this.bus.removeListener(this.rpcRequestChannelName, this.onRequest);
     }
     /** Common requests handler */
     @autobind

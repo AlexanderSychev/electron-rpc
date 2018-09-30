@@ -7,20 +7,22 @@ const webpack = require('webpack');
  * @property {string} entryPoint
  * @property {string} outDir
  * @property {string} jsFileName
+ * @property {string} library
  */
 
 /**
  * @param {MakeBundleTaskParams} params 
  * @return {Function}
  */
-const makeBundleTask = ({ entryPoint, outDir, jsFileName }) => (cb) => {
+const makeBundleTask = ({ entryPoint, outDir, jsFileName, library }) => (cb) => {
     webpack(
         {
             entry: entryPoint,
             output: {
+                library,
                 path: outDir,
                 filename: jsFileName,
-                library: 'ElectronRPC'
+                libraryTarget: 'window'
             },
             module: {
                 rules: [

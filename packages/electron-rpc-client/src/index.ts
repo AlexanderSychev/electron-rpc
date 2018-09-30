@@ -1,15 +1,15 @@
-import { EnvelopeType, Request, Response, ChannelsNamesParameters } from 'electron-rpc-types';
+import { EnvelopeType, Request, Response, ChannelsNamesParameters, ChannelsNamesProperties } from 'electron-rpc-types';
 import { resolve, isNil } from 'electron-rpc-channels-names-resolver';
-import { IpcRenderer } from 'electron';
+import { IpcRenderer, WebContents, IpcMain } from 'electron';
 import { v4 } from 'uuid';
 import autobind from 'autobind-decorator';
 
 /** Parameters for client */
-export interface ClientParams {
-    /** Name of Electron channel for RPC requests */
-    rpcRequestChannelName?: string | null;
-    /** Name of Electron channel for RPC responses */
-    rpcResponseChannelName?: string | null;
+export interface ClientParameters extends ChannelsNamesParameters {
+    /** Messages receiver */
+    receiver: IpcRenderer | IpcMain;
+    /** Messages sender */
+    sender?: IpcRenderer | WebContents | null | undefined;
 }
 
 /** Default request */
@@ -38,18 +38,21 @@ export class Client {
     private rpcRequestChannelName: string;
     /** Name of Electron channel for RPC responses */
     private rpcResponseChannelName: string;
-    /** IPC Renderer instance */
-    private ipcRenderer: IpcRenderer;
     /** Map of response listeners */
     private listeners: ResponseListenersMap;
+    /** Messages receiver */
+    private receiver: IpcRenderer | IpcMain;
+    /** Messages sender */
+    private sender: IpcRenderer | WebContents;
     /** @constructor */
-    public constructor(ipcRenderer: IpcRenderer, params?: ChannelsNamesParameters | null | undefined) {
-        const { rpcRequestChannelName, rpcResponseChannelName } = resolve(params);
+    public constructor({ receiver, sender, ...channelsNames }: ClientParameters) {
+        const { rpcRequestChannelName, rpcResponseChannelName }: ChannelsNamesProperties = resolve(channelsNames);
         this.rpcRequestChannelName = rpcRequestChannelName;
         this.rpcResponseChannelName = rpcResponseChannelName;
-        this.ipcRenderer = ipcRenderer;
+        this.receiver = receiver;
+        this.sender = isNil(sender) ? <IpcRenderer>this.receiver : sender!;
         this.listeners = {};
-        this.ipcRenderer.on(this.rpcResponseChannelName, this.onResponse);
+        this.receiver.on(this.rpcResponseChannelName, this.onResponse);
     }
     /** Common request method */
     public request<A extends any[] = [], R = void>({ procedure, ...rest }: RequestParams<A>): Promise<R> {
@@ -65,7 +68,7 @@ export class Client {
                     resolve(result!);
                 }
             };
-            this.ipcRenderer.send(this.rpcRequestChannelName, request);
+            this.sender.send(this.rpcRequestChannelName, request);
         });
     }
     /** Nonblocking request method */
