@@ -4,7 +4,6 @@
         "declaration": false
     },
     "exclude": [
-        "packages/electron-rpc-server",
         "lib"
     ]
 }

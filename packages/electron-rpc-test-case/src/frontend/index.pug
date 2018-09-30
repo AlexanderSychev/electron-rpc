@@ -7,10 +7,24 @@ html(lang="en")
         title Document
         script.
             window.__electron__ = require('electron');
-        script(src='./electron-ipc.min.js')
+        script(src='./electron-rpc.min.js')
         script(src="./app.js")
+        style.
+            button,
+            textarea {
+                margin: 5px
+            }
+
+            button {
+                display: block;
+            }
     body
         button#blocking
             h1 blocking
         button#nonblocking
             h1 nonblocking
+        button#foo
+            h1 foo
+        button#echo
+            h1 echo
+        textarea#logs
