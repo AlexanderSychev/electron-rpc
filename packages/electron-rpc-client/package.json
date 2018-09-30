@@ -12,6 +12,7 @@
   "types": "lib/index.d.ts",
   "license": "MIT",
   "dependencies": {
+    "autobind-decorator": "2.1.0",
     "electron-rpc-types": "1.0.0",
     "electron-rpc-channels-names-resolver": "1.0.0",
     "uuid": "3.3.2",

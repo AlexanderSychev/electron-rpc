@@ -2,7 +2,8 @@ import autobind from 'autobind-decorator';
 import { Event, IpcMain } from 'electron';
 import { Resolver, ChannelsNamesParameters, Request, EnvelopeType, Response } from 'electron-rpc-types';
 import { resolve, isNil } from 'electron-rpc-channels-names-resolver';
-import { TaskQueue } from './TaskQueue';
+
+import { TaskQueue } from './task/TaskQueue';
 
 /** Electron RPC Server */
 export class Server {
@@ -54,9 +55,10 @@ export class Server {
     }
     /** Blocking requests handler */
     protected async onBlockingRequest(event: Event, request: Request): Promise<void> {
-        this.queue.push(async (): Promise<void> => this.processRequest(event, request));
+        this.queue.push(this.processRequest, event, request);
     }
     /** Common process requestor */
+    @autobind
     protected async processRequest({ sender }: Event, { uuid, type, procedure, args }: Request): Promise<void> {
         const response: Response = {
             uuid,

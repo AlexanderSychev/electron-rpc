@@ -8,6 +8,7 @@ const makeCleanTask = require('./makeCleanTask');
 const makeCompileTask = require('./makeCompileTask');
 const makePrettierTask = require('./makePrettierTask');
 const makeTslintTask = require('./makeTslintTask');
+const makeMochaTasks = require('./makeMochaTasks');
 
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 const BASE_PREFIX = 'electron-rpc';
@@ -17,15 +18,19 @@ const BASE_PREFIX = 'electron-rpc';
  * @param {string} packageName
  */
 module.exports = (packageName) => {
+    // Directories
     const packageDir = path.join(PACKAGES_DIR, `${BASE_PREFIX}-${packageName}`);
     const srcDir = path.join(packageDir, 'src');
     const distDir = path.join(packageDir, 'dist');
+
+    // Tasks names
     const buildTask = `${packageName}:build`;
     const cleanTask = `${packageName}:clean`;
     const lintTask = `${packageName}:lint`;
     const prettierTask = `${packageName}:prettier`;
     const combTask = `${packageName}:comb`;
     const beforeBuildTask = `${packageName}:before-build`;
+    const unitTestsTask = `${packageName}:unit-tests`;
 
     gulp.task(buildTask, makeCompileTask(srcDir, distDir));
     gulp.task(cleanTask, makeCleanTask(distDir));
@@ -37,4 +42,6 @@ module.exports = (packageName) => {
     gulp.task(beforeBuildTask, [combTask, cleanTask]);
 
     gulp.task(packageName, sequence(beforeBuildTask, buildTask));
+
+    gulp.task(unitTestsTask, makeMochaTasks(distDir, 'unit.js'));
 };

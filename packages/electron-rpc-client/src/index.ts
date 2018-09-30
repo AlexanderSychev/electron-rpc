@@ -2,6 +2,7 @@ import { EnvelopeType, Request, Response, ChannelsNamesParameters } from 'electr
 import { resolve, isNil } from 'electron-rpc-channels-names-resolver';
 import { IpcRenderer } from 'electron';
 import { v4 } from 'uuid';
+import autobind from 'autobind-decorator';
 
 /** Parameters for client */
 export interface ClientParams {
@@ -21,6 +22,16 @@ export interface RequestParams<A extends any[] = []> {
     args?: A;
 }
 
+/** Response listener */
+interface ResponseListener {
+    (response: Response<any>): any;
+}
+
+/** Response listeners map */
+interface ResponseListenersMap {
+    [uuid: string]: ResponseListener;
+}
+
 /** RPC Client */
 export class Client {
     /** Name of Electron channel for RPC requests */
@@ -29,12 +40,16 @@ export class Client {
     private rpcResponseChannelName: string;
     /** IPC Renderer instance */
     private ipcRenderer: IpcRenderer;
+    /** Map of response listeners */
+    private listeners: ResponseListenersMap;
     /** @constructor */
     public constructor(ipcRenderer: IpcRenderer, params?: ChannelsNamesParameters | null | undefined) {
         const { rpcRequestChannelName, rpcResponseChannelName } = resolve(params);
         this.rpcRequestChannelName = rpcRequestChannelName;
         this.rpcResponseChannelName = rpcResponseChannelName;
         this.ipcRenderer = ipcRenderer;
+        this.listeners = {};
+        this.ipcRenderer.on(this.rpcResponseChannelName, this.onResponse);
     }
     /** Common request method */
     public request<A extends any[] = [], R = void>({ procedure, ...rest }: RequestParams<A>): Promise<R> {
@@ -43,15 +58,13 @@ export class Client {
         const args: A = isNil(rest.args) ? <any>[] : rest.args;
         const request: Request<A> = { type, procedure, args, uuid };
         return new Promise<R>((resolve, reject) => {
-            this.ipcRenderer.on(this.rpcResponseChannelName, ({ uuid: resUuid, result, error }: Response<R>) => {
-                if (uuid === resUuid) {
-                    if (!isNil(error)) {
-                        reject(error);
-                    } else {
-                        resolve(result!);
-                    }
+            this.listeners[uuid] = ({ result, error }: Response<R>) => {
+                if (!isNil(error)) {
+                    reject(error);
+                } else {
+                    resolve(result!);
                 }
-            });
+            };
             this.ipcRenderer.send(this.rpcRequestChannelName, request);
         });
     }
@@ -62,5 +75,13 @@ export class Client {
     /** Blocking request method */
     public blocking<A extends any[] = [], R = void>(procedure: string, ...args: A): Promise<R> {
         return this.request<A, R>({ procedure, args, type: EnvelopeType.BLOCKING });
+    }
+    /** Common response event handler */
+    @autobind
+    protected onResponse(response: Response<any>): void {
+        if (!isNil(this.listeners[response.uuid])) {
+            this.listeners[response.uuid](response);
+            delete this.listeners[response.uuid];
+        }
     }
 }
