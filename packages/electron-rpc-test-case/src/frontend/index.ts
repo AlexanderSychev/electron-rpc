@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-import { Client } from 'electron-rpc';
+import { Client, Server } from 'electron-rpc';
 
 /** Button common */
 class Button {
@@ -18,8 +18,11 @@ class Logs {
     constructor(id: string) {
         this.element = <HTMLTextAreaElement>document.getElementById(id);
     }
+    public get output(): string {
+        return this.element.value;
+    }
     public write(message: any) {
-        this.element.value = `${this.element.value}${String(message)}\n`;
+        this.element.value = `${this.output}${String(message)}\n`;
     }
 }
 
@@ -44,6 +47,11 @@ function main() {
     echo.onClick(() => {
         client.nonblocking<[string], string>('echo', `Message #${Date.now()}`).then(result => logs.write(result));
     });
+
+    const server = new Server(ipcRenderer, {
+        getLogsOutput: () => logs.output,
+    });
+    server.start();
 }
 
 window.addEventListener('load', main);
