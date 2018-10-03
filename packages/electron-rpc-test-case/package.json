@@ -10,6 +10,6 @@
   "main": "dist/electron/index.js",
   "license": "MIT",
   "dependencies": {
-    "electron-rpc": "1.0.0"
+    "electron-rpc-common": "1.0.0"
   }
 }

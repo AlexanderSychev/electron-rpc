@@ -29,6 +29,10 @@ module.exports = (packageName, library) => {
     const srcDir = path.join(packageDir, 'src');
     const distDir = path.join(packageDir, 'dist');
     const libDir = path.join(packageDir, 'lib');
+    const jsFileName =
+        packageName === BASE_PREFIX ?
+        `${packageName}.min.js` :
+        `${BASE_PREFIX}-${packageName}.min.js`;
 
     // Task names
     const bundleTask = `${packageName}:bundle`;
@@ -43,10 +47,10 @@ module.exports = (packageName, library) => {
 
     gulp.task(compileTask, makeCompileTask(srcDir, distDir));
     gulp.task(bundleTask, makeBundleTask({
+        jsFileName,
         library,
         entryPoint: path.join(srcDir, 'index.ts'),
-        outDir: libDir,
-        jsFileName: `${packageName}.min.js`
+        outDir: libDir
     }));
     gulp.task(buildTask, [bundleTask, compileTask]);
 

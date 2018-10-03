@@ -1,5 +1,5 @@
 import { EnvelopeType, Request, Response, ChannelsNamesParameters, ChannelsNamesProperties } from 'electron-rpc-types';
-import { resolve, isNil } from 'electron-rpc-channels-names-resolver';
+import { resolve, isNil } from 'electron-rpc-utils';
 import { IpcRenderer, WebContents, IpcMain, Event } from 'electron';
 import { v4 } from 'uuid';
 import autobind from 'autobind-decorator';
@@ -86,5 +86,18 @@ export class Client {
             this.listeners[response.uuid](response);
             delete this.listeners[response.uuid];
         }
+    }
+}
+
+declare global {
+    /** RPC Client */
+    interface ClientConstructor {
+        new (params: ClientParameters): Client;
+    }
+    interface ElectronRPCGlobal {
+        Client: ClientConstructor;
+    }
+    interface Window {
+        ElectronRPC: ElectronRPCGlobal;
     }
 }

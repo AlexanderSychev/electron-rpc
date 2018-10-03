@@ -59,7 +59,7 @@ const makeBundleTask = ({
             },
             externals: {
                 'electron': '__electron__',
-                'electron-rpc': 'ElectronRPC'
+                'electron-rpc-common': 'ElectronRPC'
             },
             resolve: {
                 extensions: ['.tsx', '.ts', '.js', '.json']

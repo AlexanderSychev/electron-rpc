@@ -1,7 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Event, IpcMain, IpcRenderer } from 'electron';
 import { Resolver, ChannelsNamesParameters, Request, EnvelopeType, Response } from 'electron-rpc-types';
-import { resolve, isNil } from 'electron-rpc-channels-names-resolver';
+import { resolve, isNil } from 'electron-rpc-utils';
 
 import { TaskQueue } from './task/TaskQueue';
 

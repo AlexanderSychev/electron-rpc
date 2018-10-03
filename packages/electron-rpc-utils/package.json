@@ -1,5 +1,5 @@
 {
-  "name": "electron-rpc-channels-names-resolver",
+  "name": "electron-rpc-utils",
   "author": "Alexander Sychev",
   "repository": {
     "type": "git",

@@ -14,17 +14,17 @@ export const enum RpcChannelDefaultNames {
 /** Type of envelope */
 export const enum EnvelopeType {
     /** Nonblocking (several requests of this type may be executed in parallel) */
-    NONBLOCKING = 'read',
+    NONBLOCKING = 'EnvelopeType.NONBLOCKING',
     /** Blocking (several requests of this type will be executed only in turn) */
-    BLOCKING = 'write'
+    BLOCKING = 'EnvelopeType.BLOCKING'
 }
 
 /** IPC channels names parameters signature */
 export interface ChannelsNamesParameters {
     /** Name of Electron channel for RPC requests */
-    rpcRequestChannelName?: string | null;
+    rpcRequestChannelName?: string | null | undefined;
     /** Name of Electron channel for RPC responses */
-    rpcResponseChannelName?: string | null;
+    rpcResponseChannelName?: string | null | undefined;
 }
 
 /** IPC channels names properties (completely resolved "ChannelsNamesParameters") */

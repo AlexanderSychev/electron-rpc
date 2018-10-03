@@ -31,9 +31,9 @@ module.exports = (packageName, library) => {
     const distDir = path.join(packageDir, 'dist');
     const externalPath = path.join(
         PACKAGES_DIR,
-        'electron-rpc',
+        'electron-rpc-common',
         'lib',
-        'electron-rpc.min.js'
+        'electron-rpc-common.min.js'
     );
 
     // Task names

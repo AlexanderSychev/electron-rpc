@@ -1,5 +1,5 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
-import { Server, Client } from 'electron-rpc';
+import { Server, Client } from 'electron-rpc-common';
 import * as path from 'path';
 
 const sleep = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));

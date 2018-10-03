@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-import { Client, Server } from 'electron-rpc';
+import { Client, Server } from 'electron-rpc-common';
 
 /** Button common */
 class Button {

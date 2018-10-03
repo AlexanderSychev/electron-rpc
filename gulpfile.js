@@ -5,16 +5,16 @@ const sequence = require('gulp-sequence');
 
 const { universalProject, testCaseProject } = require('./build-tools');
 
-universalProject('channels-names-resolver', 'ElectronRPCUtils');
-universalProject('server', 'ElectronRPCServer');
-universalProject('client', 'ElectronRPCClient');
-universalProject('electron-rpc', 'ElectronRPC');
+universalProject('utils', 'ElectronRPC');
+universalProject('server', 'ElectronRPC');
+universalProject('client', 'ElectronRPC');
+universalProject('common', 'ElectronRPC');
 testCaseProject('test-case', 'TestCase');
 
 gulp.task('default', sequence(
-    'channels-names-resolver',
+    'utils',
     'server',
     'client',
-    'electron-rpc',
+    'common',
     'test-case'
 ));
