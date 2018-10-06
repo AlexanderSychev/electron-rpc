@@ -2,8 +2,8 @@ import { RequestLoggingFunction, SuccessLoggingFunction, ErrorLoggingFunction, E
 
 import { isNil } from './isNil';
 
-/** Loggable entity */
-export class Loggable {
+/** Abstract loggable entity */
+export abstract class Loggable {
     /** Request logging function */
     private requestLogger: RequestLoggingFunction | null;
     /** Success logging function */
