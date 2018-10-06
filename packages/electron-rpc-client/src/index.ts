@@ -1,5 +1,12 @@
-import { EnvelopeType, Request, Response, ChannelsNamesParameters, ChannelsNamesProperties } from 'electron-rpc-types';
-import { resolve, isNil } from 'electron-rpc-utils';
+import {
+    EnvelopeType,
+    Request,
+    Response,
+    ChannelsNamesParameters,
+    ChannelsNamesProperties,
+    Envelope,
+} from 'electron-rpc-types';
+import { resolve, isNil, Loggable } from 'electron-rpc-utils';
 import { IpcRenderer, WebContents, IpcMain, Event } from 'electron';
 import { v4 } from 'uuid';
 import autobind from 'autobind-decorator';
@@ -33,7 +40,7 @@ interface ResponseListenersMap {
 }
 
 /** RPC Client */
-export class Client {
+export class Client extends Loggable {
     /** Name of Electron channel for RPC requests */
     private rpcRequestChannelName: string;
     /** Name of Electron channel for RPC responses */
@@ -46,6 +53,7 @@ export class Client {
     private sender: IpcRenderer | WebContents;
     /** @constructor */
     public constructor({ receiver, sender, ...channelsNames }: ClientParameters) {
+        super();
         const { rpcRequestChannelName, rpcResponseChannelName }: ChannelsNamesProperties = resolve(channelsNames);
         this.rpcRequestChannelName = rpcRequestChannelName;
         this.rpcResponseChannelName = rpcResponseChannelName;
@@ -59,12 +67,16 @@ export class Client {
         const uuid: string = v4();
         const type: EnvelopeType = isNil(rest.type) ? EnvelopeType.BLOCKING : rest.type!;
         const args: A = isNil(rest.args) ? <any>[] : rest.args;
-        const request: Request<A> = { type, procedure, args, uuid };
+        const envelope: Envelope = { type, procedure, uuid };
+        const request: Request<A> = { ...envelope, args };
+        this.logRequest(envelope, args);
         return new Promise<R>((resolve, reject) => {
             this.listeners[uuid] = ({ result, error }: Response<R>) => {
                 if (!isNil(error)) {
+                    this.logError(envelope, args, error!);
                     reject(error);
                 } else {
+                    this.logSuccess(envelope, args, result!);
                     resolve(result!);
                 }
             };

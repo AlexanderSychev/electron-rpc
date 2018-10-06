@@ -1,5 +1,17 @@
 import { ipcRenderer } from 'electron';
-import { Client, Server } from 'electron-rpc-common';
+import { Client, Server, Loggable } from 'electron-rpc-common';
+
+function bindLogging(loggable: Loggable): void {
+    loggable.setRequestLogger(({ uuid, procedure }, args) => {
+        console.log(`[REQUEST] ENVELOPE #${uuid}: "${procedure}"(${args.join(', ')})`);
+    });
+    loggable.setSuccessLogger(({ uuid, procedure }, args, result) => {
+        console.log(`[SUCCESS] ENVELOPE #${uuid} "${procedure}"(${args.join(', ')}) => ${result}`);
+    });
+    loggable.setErrorLogger(({ uuid, procedure }, args, error) => {
+        console.log(`[ERROR] ENVELOPE #${uuid} "${procedure}"(${args.join(', ')}) => ${error}`);
+    });
+}
 
 /** Button common */
 class Button {
@@ -28,6 +40,7 @@ class Logs {
 
 function main() {
     const client = new Client({ receiver: ipcRenderer, sender: ipcRenderer });
+    bindLogging(client);
 
     const logs = new Logs('logs');
 
@@ -47,10 +60,15 @@ function main() {
     echo.onClick(() => {
         client.nonblocking<[string], string>('echo', `Message #${Date.now()}`).then(result => logs.write(result));
     });
+    const throwable = new Button('throwable');
+    throwable.onClick(() => {
+        client.nonblocking('throwable');
+    });
 
     const server = new Server(ipcRenderer, {
         getLogsOutput: () => logs.output,
     });
+    bindLogging(server);
     server.start();
 }
 

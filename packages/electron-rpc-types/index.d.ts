@@ -58,3 +58,18 @@ export interface Response<R = any> extends Envelope {
     /** Response error */
     error: string | null | undefined;
 }
+
+/** Request logging function */
+export interface RequestLoggingFunction {
+    (envelope: Envelope, args: any[]): any;
+}
+
+/** Success logging function */
+export interface SuccessLoggingFunction {
+    (envelope: Envelope, args: any[], response: any): any;
+}
+
+/** Error logging function */
+export interface ErrorLoggingFunction {
+    (envelope: Envelope, args: any[], error: string): any;
+}
