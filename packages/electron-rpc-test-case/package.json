@@ -2,6 +2,7 @@
   "name": "electron-rpc-test-case",
   "author": "Alexander Sychev",
   "description": "Test application for Electron RPC",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git@github.com:AlexanderSychev/electron-rpc.git"
