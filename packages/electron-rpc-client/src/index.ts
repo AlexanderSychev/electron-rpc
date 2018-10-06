@@ -9,11 +9,11 @@ export interface ClientParameters extends ChannelsNamesParameters {
     /** Messages receiver */
     receiver: IpcRenderer | IpcMain;
     /** Messages sender */
-    sender?: IpcRenderer | WebContents | null | undefined;
+    sender: IpcRenderer | WebContents;
 }
 
 /** Default request */
-export interface RequestParams<A extends any[] = []> {
+export interface RequestParams<A extends any[] = any[]> {
     /** Procedure params */
     procedure: string;
     /** Type of envelope ("EnvelopeType.WRITE" by default) */
@@ -50,12 +50,12 @@ export class Client {
         this.rpcRequestChannelName = rpcRequestChannelName;
         this.rpcResponseChannelName = rpcResponseChannelName;
         this.receiver = receiver;
-        this.sender = isNil(sender) ? <IpcRenderer>this.receiver : sender!;
+        this.sender = sender;
         this.listeners = {};
         this.receiver.on(this.rpcResponseChannelName, this.onResponse);
     }
     /** Common request method */
-    public request<A extends any[] = [], R = void>({ procedure, ...rest }: RequestParams<A>): Promise<R> {
+    public request<A extends any[] = any[], R = any>({ procedure, ...rest }: RequestParams<A>): Promise<R> {
         const uuid: string = v4();
         const type: EnvelopeType = isNil(rest.type) ? EnvelopeType.BLOCKING : rest.type!;
         const args: A = isNil(rest.args) ? <any>[] : rest.args;
@@ -72,11 +72,11 @@ export class Client {
         });
     }
     /** Nonblocking request method */
-    public nonblocking<A extends any[] = [], R = void>(procedure: string, ...args: A): Promise<R> {
+    public nonblocking<A extends any[] = any[], R = any>(procedure: string, ...args: A): Promise<R> {
         return this.request<A, R>({ procedure, args, type: EnvelopeType.NONBLOCKING });
     }
     /** Blocking request method */
-    public blocking<A extends any[] = [], R = void>(procedure: string, ...args: A): Promise<R> {
+    public blocking<A extends any[] = any[], R = any>(procedure: string, ...args: A): Promise<R> {
         return this.request<A, R>({ procedure, args, type: EnvelopeType.BLOCKING });
     }
     /** Common response event handler */

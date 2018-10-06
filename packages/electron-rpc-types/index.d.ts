@@ -46,13 +46,13 @@ export interface Envelope {
 }
 
 /** Request */
-export interface Request<A extends any[] = []> extends Envelope {
+export interface Request<A extends any[] = any[]> extends Envelope {
     /** Arguments for remote procedure */
     args: A;
 }
 
 /** Response */
-export interface Response<R = void> extends Envelope {
+export interface Response<R = any> extends Envelope {
     /** Response result */
     result: R | null | undefined;
     /** Response error */

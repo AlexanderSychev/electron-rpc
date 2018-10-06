@@ -27,7 +27,7 @@ class Logs {
 }
 
 function main() {
-    const client = new Client({ receiver: ipcRenderer });
+    const client = new Client({ receiver: ipcRenderer, sender: ipcRenderer });
 
     const logs = new Logs('logs');
 
