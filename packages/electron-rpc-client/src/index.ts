@@ -93,7 +93,7 @@ export class Client extends Loggable {
     }
     /** Common response event handler */
     @autobind
-    protected onResponse(target: Event, response: Response<any>): void {
+    private onResponse(target: Event, response: Response<any>): void {
         if (!isNil(this.listeners[response.uuid])) {
             this.listeners[response.uuid](response);
             delete this.listeners[response.uuid];

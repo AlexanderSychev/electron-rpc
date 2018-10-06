@@ -11,7 +11,7 @@ export abstract class Loggable {
     /** Error logging function */
     private errorLogger: ErrorLoggingFunction | null;
     /** @constructor */
-    public constructor() {
+    protected constructor() {
         this.requestLogger = null;
         this.successLogger = null;
         this.errorLogger = null;

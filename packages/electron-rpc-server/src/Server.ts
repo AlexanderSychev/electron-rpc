@@ -41,7 +41,7 @@ export class Server extends Loggable {
     }
     /** Common requests handler */
     @autobind
-    protected async onRequest(event: Event, { type, procedure, uuid, ...rest }: Request): Promise<void> {
+    private async onRequest(event: Event, { type, procedure, uuid, ...rest }: Request): Promise<void> {
         this.logRequest({ type, procedure, uuid }, rest.args);
         switch (type) {
             case EnvelopeType.NONBLOCKING: {
@@ -56,16 +56,16 @@ export class Server extends Loggable {
         }
     }
     /** Unblocking requests handler */
-    protected async onNonblockingRequest(event: Event, request: Request): Promise<void> {
+    private async onNonblockingRequest(event: Event, request: Request): Promise<void> {
         await this.processRequest(event, request);
     }
     /** Blocking requests handler */
-    protected async onBlockingRequest(event: Event, request: Request): Promise<void> {
+    private async onBlockingRequest(event: Event, request: Request): Promise<void> {
         this.queue.push(this.processRequest, event, request);
     }
     /** Common process requestor */
     @autobind
-    protected async processRequest({ sender }: Event, { uuid, type, procedure, args }: Request): Promise<void> {
+    private async processRequest({ sender }: Event, { uuid, type, procedure, args }: Request): Promise<void> {
         const response: Response = {
             uuid,
             type,
