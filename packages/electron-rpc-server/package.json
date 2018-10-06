@@ -17,14 +17,14 @@
     "type": "git",
     "url": "git@github.com:AlexanderSychev/electron-rpc.git"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
   "dependencies": {
     "autobind-decorator": "2.1.0",
-    "electron-rpc-types": "1.0.0",
-    "electron-rpc-utils": "1.0.0",
+    "electron-rpc-types": "^1.0.1",
+    "electron-rpc-utils": "^1.0.1",
     "tslib": "1.9.3"
   }
 }
