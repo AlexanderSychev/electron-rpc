@@ -1,6 +1,17 @@
 {
   "name": "electron-rpc-utils",
   "author": "Alexander Sychev",
+  "keywords": [
+    "electron",
+    "electron-rpc",
+    "rpc",
+    "electron-ipc",
+    "ipc",
+    "electron-rpc-utils",
+    "rpc-utils",
+    "ipc-utils",
+    "utils"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:AlexanderSychev/electron-rpc.git"

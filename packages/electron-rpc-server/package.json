@@ -2,6 +2,17 @@
   "name": "electron-rpc-server",
   "author": "Alexander Sychev",
   "description": "Electron RPC Server",
+  "keywords": [
+    "electron",
+    "electron-rpc",
+    "rpc",
+    "electron-ipc",
+    "ipc",
+    "electron-rpc-server",
+    "rpc-server",
+    "ipc-server",
+    "server"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:AlexanderSychev/electron-rpc.git"

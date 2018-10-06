@@ -2,8 +2,6 @@ import { Resolver, ChannelsNamesParameters } from 'electron-rpc-types';
 import { IpcMain, IpcRenderer } from 'electron';
 
 import { Server } from './Server';
-
-export { TaskBody, TaskQueue, TaskEventType, TaskResult } from './task';
 export { Server };
 
 declare global {

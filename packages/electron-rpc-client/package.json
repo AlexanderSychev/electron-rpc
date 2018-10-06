@@ -1,12 +1,22 @@
 {
   "name": "electron-rpc-client",
   "author": "Alexander Sychev",
+  "keywords": [
+    "electron",
+    "electron-rpc",
+    "rpc",
+    "electron-ipc",
+    "ipc",
+    "electron-rpc-client",
+    "rpc-client",
+    "ipc-client",
+    "client"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:AlexanderSychev/electron-rpc.git"
   },
   "description": "Electron RPC Client library",
-  "author": "Alexander Sychev",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
