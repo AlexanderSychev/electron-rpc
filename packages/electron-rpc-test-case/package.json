@@ -7,10 +7,10 @@
     "type": "git",
     "url": "git@github.com:AlexanderSychev/electron-rpc.git"
   },
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "dist/electron/index.js",
   "license": "MIT",
   "dependencies": {
-    "electron-rpc-common": "^1.0.1"
+    "electron-rpc-common": "^1.1.0"
   }
 }
