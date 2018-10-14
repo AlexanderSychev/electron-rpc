@@ -1,3 +1,16 @@
+/** Controller like - some function which constructs something */
+export interface Newable<T = any> extends Function {
+    new (...args: any[]): T;
+}
+
+/** Action data */
+export interface ActionData {
+    /** Original name of action */
+    originName: string | symbol;
+    /** RPC name fragment */
+    rpcName: string;
+}
+
 /** Common RPC incoming envelopes resolver */
 export interface Resolver {
     [name: string]: (...args: any[]) => any;

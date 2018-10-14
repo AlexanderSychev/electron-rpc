@@ -19,7 +19,7 @@ export class Server extends Loggable {
     /** @constructor */
     public constructor(
         bus: IpcMain | IpcRenderer,
-        resolver: Resolver,
+        resolver: Resolver = {},
         channels?: ChannelsNamesParameters | null | undefined,
     ) {
         super();
@@ -37,6 +37,13 @@ export class Server extends Loggable {
     /** Stop server */
     public stop(): void {
         this.bus.removeListener(this.rpcRequestChannelName, this.onRequest);
+    }
+    /** Extends resolver by other resolver */
+    public extendResolver(extension: Resolver = {}): void {
+        this.resolver = {
+            ...this.resolver,
+            ...extension,
+        };
     }
     /** Common requests handler */
     @autobind

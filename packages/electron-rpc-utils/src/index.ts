@@ -5,6 +5,7 @@ export { Loggable };
 
 export { isNil } from './isNil';
 export { resolve } from './resolve';
+export { getControllerMethodName } from './getControllerMethodName';
 
 declare global {
     /** Constructor of "Loggable" */
@@ -18,6 +19,8 @@ declare global {
         isNil(value: any): value is null | undefined;
         /** Resolves client channels parameters */
         resolve(params?: ChannelsNamesParameters | null | undefined): ChannelsNamesProperties;
+        /** Builds remote procedure name for controller and service */
+        getControllerMethodName(rpcServiceName: string, rpcMethodName: string): string;
     }
     interface Window {
         /** Electron RPC Client bundle library */

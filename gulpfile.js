@@ -10,13 +10,16 @@ universalProject('server', 'ElectronRPC');
 universalProject('client', 'ElectronRPC');
 universalProject('common', 'ElectronRPC');
 universalProject('async-queue', 'ElectronRPC', true);
+universalProject('server-controllers', 'ElectronRPC');
+universalProject('client-services', 'ElectronRPC');
 testCaseProject('test-case', 'TestCase');
 
 gulp.task('default', sequence(
     'utils',
-    'test-case',
     'server',
+    'server-controllers',
     'client',
+    'client-services',
     'common',
     'test-case'
 ));

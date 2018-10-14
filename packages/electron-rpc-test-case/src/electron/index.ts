@@ -1,8 +1,9 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
-import { Server, Client, Loggable } from 'electron-rpc-common';
+import { Server, Client, Loggable, bindControllersToServer, bindServicesToClient } from 'electron-rpc-common';
 import * as path from 'path';
 
-const sleep = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
+import { MainController } from './MainController';
+import { ClientService } from './ClientService';
 
 function bindLogging(loggable: Loggable): void {
     loggable.setRequestLogger(({ uuid, procedure }, args) => {
@@ -22,38 +23,24 @@ function unbindLogging(loggable: Loggable): void {
     loggable.setErrorLogger(null);
 }
 
-const server = new Server(ipcMain, {
-    nonblocking: async () => {
-        await sleep(1000);
-    },
-    blocking: async () => {
-        await sleep(1000);
-    },
-    foo: async () => {
-        await sleep(500);
-        return 'bar';
-    },
-    throwable: async () => {
-        await sleep(500);
-        throw new Error('Test error');
-    },
-    echo: async (message: string) => {
-        return message;
-    },
-});
+const server = new Server(ipcMain);
+bindControllersToServer(server, [MainController]);
 
 bindLogging(server);
 
 let client: Client | null = null;
+let clientService: ClientService | null = null;
 let win: BrowserWindow | null = null;
 
 function createWindow() {
     win = new BrowserWindow({ width: 800, height: 600 });
     client = new Client({ receiver: ipcMain, sender: win.webContents });
+    bindServicesToClient(client, [ClientService]);
+    clientService = new ClientService();
     bindLogging(client);
     server.start();
     const interval = async () => {
-        const output = await client!.nonblocking<[], string>('getLogsOutput');
+        const output = await clientService!.getLogsOutput();
         const date = new Date();
         console.log(`LOGS OUTPUT AT ${date.toISOString()}\n\n${output}`);
     };
@@ -69,6 +56,7 @@ function createWindow() {
         win = null;
         unbindLogging(client!);
         client = null;
+        clientService = null;
     });
 }
 
