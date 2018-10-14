@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 
-import { TaskQueue } from './TaskQueue';
+import { AsyncQueue } from './AsyncQueue';
 
 const sleep = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -18,7 +18,7 @@ const makeTestCase = (isFirstAsync: boolean, isSecondAsync: boolean, isThirdAsyn
     const secondTaskType: string = isSecondAsync ? 'async' : 'sync';
     const thirdTaskType: string = isThirdAsync ? 'async' : 'sync';
     it(`${firstTaskType} task #1, ${secondTaskType} task #2 and ${thirdTaskType} task #3 runs in turn`, async () => {
-        const queue = new TaskQueue();
+        const queue = new AsyncQueue();
         const executed: string[] = [];
         const task1 = isFirstAsync ? makeAsyncTask(1, executed) : makeSyncTask(1, executed);
         const task2 = isSecondAsync ? makeAsyncTask(2, executed) : makeSyncTask(2, executed);

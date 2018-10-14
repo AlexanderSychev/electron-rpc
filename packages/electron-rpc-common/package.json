@@ -41,6 +41,7 @@
     "electron-rpc-server": "^1.1.0",
     "electron-rpc-types": "^1.1.0",
     "electron-rpc-utils": "^1.1.0",
+    "electron-rpc-async-queue": "^1.1.0",
     "tslib": "1.9.3"
   }
 }

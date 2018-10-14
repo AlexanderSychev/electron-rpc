@@ -1,4 +1,4 @@
-import { EventEmitter } from 'events';
+import * as EventEmitter from 'micro-events';
 
 import { TaskBody } from './TaskBody';
 import { TaskEventType } from './TaskEventType';

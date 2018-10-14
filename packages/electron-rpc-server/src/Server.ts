@@ -2,8 +2,7 @@ import autobind from 'autobind-decorator';
 import { Event, IpcMain, IpcRenderer } from 'electron';
 import { Resolver, ChannelsNamesParameters, Request, EnvelopeType, Response } from 'electron-rpc-types';
 import { resolve, isNil, Loggable } from 'electron-rpc-utils';
-
-import { TaskQueue } from './task/TaskQueue';
+import { AsyncQueue } from 'electron-rpc-async-queue';
 
 /** Electron RPC Server */
 export class Server extends Loggable {
@@ -14,7 +13,7 @@ export class Server extends Loggable {
     /** Response IPC channel name */
     private rpcResponseChannelName: string;
     /** Blocking requests queue */
-    private queue: TaskQueue;
+    private queue: AsyncQueue;
     /** Main process IPC bus */
     private bus: IpcMain | IpcRenderer;
     /** @constructor */
@@ -29,7 +28,7 @@ export class Server extends Loggable {
         this.rpcResponseChannelName = rpcResponseChannelName;
         this.resolver = resolver;
         this.bus = bus;
-        this.queue = new TaskQueue();
+        this.queue = new AsyncQueue();
     }
     /** Start server */
     public start(): void {

@@ -4312,6 +4312,11 @@ merge2@1.2.2, merge2@^1.2.1:
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.2.2.tgz#03212e3da8d86c4d8523cebd6318193414f94e34"
   integrity sha512-bgM8twH86rWni21thii6WCMQMRMmwqqdW3sGWi9IipnVAszdLXRjwDwAnyrVXo6DuP3AjRMMttZKUB48QWIFGg==
 
+micro-events@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/micro-events/-/micro-events-1.0.0.tgz#da96727e1d20140c3850643e6f4cffd26db19593"
+  integrity sha1-2pZyfh0gFAw4UGQ+b0z/0m2xlZM=
+
 micromatch@^3.0.4, micromatch@^3.1.10, micromatch@^3.1.4, micromatch@^3.1.8:
   version "3.1.10"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-3.1.10.tgz#70859bc95c9840952f359a068a3fc49f9ecfac23"

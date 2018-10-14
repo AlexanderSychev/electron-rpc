@@ -2,18 +2,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
-
-const PACKAGES_DIR = path.resolve(__dirname, '../packages');
-const NODE_MODULES = path.resolve(__dirname, '../node_modules');
-
-const PREFIX = 'electron-rpc';
-
-const PACKAGES = [
-    'electron-rpc',
-    'client',
-    'server',
-    'test-case'
-];
+const glob = require('glob');
 
 /**
  * @typedef {Object} MakeBundleTaskParams
@@ -22,6 +11,7 @@ const PACKAGES = [
  * @property {string} jsFileName
  * @property {string} library
  * @property {string} packageName
+ * @property {string} [typesDir]
  */
 
 /**
@@ -32,7 +22,8 @@ const makeBundleTask = ({
     entryPoint,
     outDir,
     jsFileName,
-    library
+    library,
+    typesDir
 }) => (cb) => {
     webpack(
         {
@@ -51,7 +42,16 @@ const makeBundleTask = ({
                             loader: 'ts-loader',
                             options: {
                                 configFile: 'tsconfig.webpack.json',
-                                onlyCompileBundledFiles: true
+                                onlyCompileBundledFiles: true,
+                                compilerOptions: (
+                                    typesDir ?
+                                    {
+                                        typeRoots: [
+                                            typesDir
+                                        ]
+                                    } :
+                                    {}
+                                )
                             }
                         }
                     }

@@ -8,11 +8,14 @@ const merge2 = require('merge2');
 
 const TS_CONFIG_PATH = path.resolve(__dirname, '../tsconfig.json');
 
-module.exports = (srcDir, distDir, tsConfigPath = TS_CONFIG_PATH) => {
+module.exports = (srcDir, distDir, typesDir) => {
     const srcPattern = [
         path.join(srcDir, '**/*.ts'),
         path.join(srcDir, '**/*.tsx')
     ];
+    if (typesDir) {
+        srcPattern.unshift(path.join(typesDir, '**', '*.d.ts'));
+    }
     const project = ts.createProject(TS_CONFIG_PATH, { typescript });
     return () => {
         const tsResult = gulp.src(srcPattern).pipe(project());

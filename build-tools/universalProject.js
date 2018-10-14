@@ -18,14 +18,16 @@ const BASE_PREFIX = 'electron-rpc';
  * Define universal (with bundle) project
  * @param {string} packageName Name of package
  * @param {string} library Frontend version global variable
+ * @param {boolean} [withTypes] If "true", "@types" subdirectory will be added
  */
-module.exports = (packageName, library) => {
+module.exports = (packageName, library, withTypes) => {
     // Directories
     const packageDir = path.join(
         PACKAGES_DIR,
         packageName === BASE_PREFIX ?
             packageName : `${BASE_PREFIX}-${packageName}`
     );
+    const typesDir = path.join(packageDir, '@types');
     const srcDir = path.join(packageDir, 'src');
     const distDir = path.join(packageDir, 'dist');
     const libDir = path.join(packageDir, 'lib');
@@ -45,10 +47,14 @@ module.exports = (packageName, library) => {
     const beforeBuildTask = `${packageName}:before-build`;
     const unitTestsTask = `${packageName}:unit-tests`;
 
-    gulp.task(compileTask, makeCompileTask(srcDir, distDir));
+    gulp.task(
+        compileTask,
+        makeCompileTask(srcDir, distDir, withTypes ? typesDir : undefined)
+    );
     gulp.task(bundleTask, makeBundleTask({
         jsFileName,
         library,
+        typesDir: withTypes ? typesDir : undefined,
         entryPoint: path.join(srcDir, 'index.ts'),
         outDir: libDir
     }));
