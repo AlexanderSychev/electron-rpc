@@ -1,4 +1,4 @@
-# "electron-rpc-channels-names-resolver"
+# "electron-rpc-utils"
 
 Utilities package for Electron RPC.
 

@@ -1,0 +1,49 @@
+{
+  "name": "electron-rpc-common",
+  "author": "Alexander Sychev",
+  "description": "Electron RPC implementation",
+  "keywords": [
+    "electron",
+    "electron-rpc",
+    "rpc",
+    "electron-ipc",
+    "ipc",
+    "electron-rpc-types",
+    "rpc-types",
+    "ipc-types",
+    "types",
+    "typings",
+    "typescript",
+    "electron-rpc-utils",
+    "rpc-utils",
+    "ipc-utils",
+    "utils",
+    "electron-rpc-server",
+    "rpc-server",
+    "ipc-server",
+    "server",
+    "electron-rpc-client",
+    "rpc-client",
+    "ipc-client",
+    "client"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AlexanderSychev/electron-rpc.git"
+  },
+  "version": "1.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "dependencies": {
+    "autobind-decorator": "2.1.0",
+    "electron-rpc-client": "^1.1.0",
+    "electron-rpc-server": "^1.1.0",
+    "electron-rpc-types": "^1.1.0",
+    "electron-rpc-utils": "^1.1.0",
+    "electron-rpc-async-queue": "^1.1.0",
+    "electron-rpc-client-services": "^1.1.0",
+    "electron-rpc-server-controllers": "^1.1.0",
+    "tslib": "1.9.3"
+  }
+}
