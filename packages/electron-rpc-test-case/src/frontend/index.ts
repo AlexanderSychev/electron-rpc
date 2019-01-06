@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-import { Client, Server, Loggable, bindControllersToServer, bindServicesToClient } from 'electron-rpc-common';
+import { Client, Server, Loggable, bindControllersToServer, Factory } from 'electron-rpc-common';
 
 import { Button, Logs } from './components';
 import { ClientController } from './ClientController';
@@ -19,9 +19,8 @@ function bindLogging(loggable: Loggable): void {
 
 function main() {
     const client = new Client({ receiver: ipcRenderer, sender: ipcRenderer });
-    bindServicesToClient(client, [MainService]);
-    const mainService = new MainService();
-    console.log(mainService.echo);
+    const factory = new Factory(client);
+    const mainService: MainService = factory.createService(MainService);
     bindLogging(client);
 
     const logs = new Logs('logs');

@@ -9,27 +9,39 @@
     "url": "git@github.com:AlexanderSychev/electron-rpc.git"
   },
   "scripts": {
-    "build": "gulp",
-    "start": "electron ./packages/electron-rpc-test-case"
+    "build": "make",
+    "start": "electron ./packages/electron-rpc-test-case",
+    "docs": "static-server -p 8000",
+    "async-queue": "make async-queue",
+    "utils": "make utils",
+    "client": "make client",
+    "server": "make server",
+    "server-controllers": "make server-controllers",
+    "client-services": "make client-services",
+    "common": "make common",
+    "test-case": "make test-case"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
+    "@babel/core": "7.0.0",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/plugin-proposal-decorators": "7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "7.0.0",
+    "@babel/plugin-transform-react-jsx-source": "7.0.0",
+    "@babel/polyfill": "7.0.0",
+    "@babel/preset-env": "7.0.0",
+    "@babel/preset-react": "7.0.0",
+    "@babel/preset-typescript": "7.0.0",
     "@types/uuid": "3.4.4",
     "@types/mocha": "5.2.5",
-    "declaration-bundler-webpack-plugin": "1.0.3",
+    "babel-loader": "8.0.0",
+    "babel-plugin-add-react-displayname": "0.0.5",
+    "babel-plugin-lodash": "3.3.4",
+    "babel-plugin-styled-components": "1.8.0",
     "electron": "3.0.1",
-    "gulp": "3.9.1",
-    "gulp-mocha": "6.0.0",
-    "gulp-concat": "2.6.1",
-    "gulp-pug": "4.0.1",
-    "gulp-prettier": "2.0.0",
-    "gulp-sequence": "1.0.0",
-    "gulp-tslint": "8.1.3",
-    "gulp-typescript": "5.0.0-alpha.3",
     "lerna": "3.4.0",
-    "merge2": "1.2.2",
     "mocha": "5.2.0",
     "mkdirp": "0.5.1",
     "pug": "2.0.3",
@@ -41,6 +53,8 @@
     "tslint-config-airbnb": "5.10.0",
     "tslint-config-prettier": "1.15.0",
     "typescript": "3.0.3",
-    "webpack": "4.19.1"
+    "static-server": "2.2.1",
+    "webpack": "4.19.1",
+    "webpack-cli": "3.1.2"
   }
 }

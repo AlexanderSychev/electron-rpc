@@ -11,7 +11,7 @@ const DELAY: number = 500;
 
 const sleep = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 
-const makeSyncTask = (throwsError?: boolean): Task =>
+const makeSyncTask = (throwsError?: boolean): Task<[], void> =>
     new Task(
         throwsError
             ? () => {
@@ -20,7 +20,7 @@ const makeSyncTask = (throwsError?: boolean): Task =>
             : () => void 0,
     );
 
-const makeAsyncTask = (throwsError?: boolean): Task =>
+const makeAsyncTask = (throwsError?: boolean): Task<[], void> =>
     new Task(
         throwsError
             ? async () => {

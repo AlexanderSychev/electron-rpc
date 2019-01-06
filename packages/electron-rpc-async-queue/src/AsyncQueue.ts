@@ -6,7 +6,7 @@ import { TaskResult } from './TaskResult';
 /** Queue structure */
 export class AsyncQueue {
     /** Tasks queue array */
-    private queue: Task[] = [];
+    private queue: Task<any[], any>[] = [];
     /** Add element to queue */
     public async push<A extends any[] = any[], R = any>(body: TaskBody<A, R>, ...args: A): Promise<TaskResult<A, R>> {
         const task: Task<A, R> = new Task<A, R>(body, ...args);
@@ -16,7 +16,7 @@ export class AsyncQueue {
                 resolve({ error, result, args });
             }),
         );
-        this.queue.push(task);
+        this.queue.push(<any>task);
         if (this.queue.length > 1) {
             const TASK_INDEX: number = this.queue.length - 1;
             const PREV_TASK_INDEX = TASK_INDEX - 1;

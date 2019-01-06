@@ -1,9 +1,7 @@
-import { Service, Procedure, EnvelopeType, stub } from 'electron-rpc-common';
+import { Service, Procedure, EnvelopeType, ServiceProcedure } from 'electron-rpc-common';
 
 @Service('Client')
 export class ClientService {
     @Procedure('getLogsOutput', EnvelopeType.NONBLOCKING)
-    public getLogsOutput(): Promise<string> {
-        return stub();
-    }
+    public getLogsOutput!: ServiceProcedure<[], string>;
 }

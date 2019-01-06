@@ -1,5 +1,8 @@
+/* tslint:disable:no-console */
+
+import 'reflect-metadata';
 import { app, BrowserWindow, ipcMain } from 'electron';
-import { Server, Client, Loggable, bindControllersToServer, bindServicesToClient } from 'electron-rpc-common';
+import { Server, Client, Loggable, bindControllersToServer, Factory } from 'electron-rpc-common';
 import * as path from 'path';
 
 import { MainController } from './MainController';
@@ -29,14 +32,15 @@ bindControllersToServer(server, [MainController]);
 bindLogging(server);
 
 let client: Client | null = null;
+let factory: Factory | null = null;
 let clientService: ClientService | null = null;
 let win: BrowserWindow | null = null;
 
 function createWindow() {
     win = new BrowserWindow({ width: 800, height: 600 });
     client = new Client({ receiver: ipcMain, sender: win.webContents });
-    bindServicesToClient(client, [ClientService]);
-    clientService = new ClientService();
+    factory = new Factory(client);
+    clientService = factory.createService(ClientService);
     bindLogging(client);
     server.start();
     const interval = async () => {

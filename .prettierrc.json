@@ -5,5 +5,26 @@
     "trailingComma": "all",
     "bracketSpacing": true,
     "jsxBracketSameLine": false,
-    "tabWidth": 4
+    "tabWidth": 4,
+    "overrides": [
+        {
+            "files": ["**/*.js"],
+            "options": {
+                "parser": "flow",
+                "trailingComma": "es5"
+            }
+        },
+        {
+            "files": ["**/.*rc"],
+            "options": {
+                "parser": "json"
+            }
+        },
+        {
+            "files": ["package.json", "packages/*/package.json"],
+            "options": {
+                "printWidth": 240
+            }
+        }
+    ]
 }

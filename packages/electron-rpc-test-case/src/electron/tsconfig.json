@@ -1,0 +1,10 @@
+{
+    "extends": "../../../../tsconfig.json",
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "rootDir": ".",
+        "outDir": "../../dist/electron",
+        "types": ["reflect-metadata"]
+    }
+}

@@ -1,25 +1,19 @@
-import { Service, Procedure, stub, EnvelopeType } from 'electron-rpc-common';
+import { Service, Procedure, ServiceProcedure, EnvelopeType } from 'electron-rpc-common';
 
 @Service('Main')
 export class MainService {
     @Procedure('nonblocking', EnvelopeType.NONBLOCKING)
-    public nonblocking(): Promise<void> {
-        return stub();
-    }
+    public nonblocking!: ServiceProcedure<[], void>;
+
     @Procedure('blocking', EnvelopeType.BLOCKING)
-    public blocking(): Promise<void> {
-        return stub();
-    }
+    public blocking!: ServiceProcedure<[], void>;
+
     @Procedure('foo', EnvelopeType.BLOCKING)
-    public foo(): Promise<string> {
-        return stub();
-    }
+    public foo!: ServiceProcedure<[], void>;
+
     @Procedure('throwable', EnvelopeType.NONBLOCKING)
-    public throwable(): Promise<void> {
-        return stub();
-    }
+    public throwable!: ServiceProcedure<[], void>;
+
     @Procedure('echo', EnvelopeType.NONBLOCKING)
-    public echo(message: string): Promise<string> {
-        return stub(message);
-    }
+    public echo!: ServiceProcedure<[string], void>;
 }

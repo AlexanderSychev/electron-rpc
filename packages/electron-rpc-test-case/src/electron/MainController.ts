@@ -4,25 +4,25 @@ const sleep = (ms: number): Promise<void> => new Promise(resolve => setTimeout(r
 
 @Controller('Main')
 export class MainController {
-    @Action('nonblocking')
+    @Action()
     public async nonblocking(): Promise<void> {
         await sleep(1000);
     }
-    @Action('blocking')
+    @Action()
     public async blocking(): Promise<void> {
         await sleep(1000);
     }
-    @Action('foo')
+    @Action()
     public async foo(): Promise<string> {
         await sleep(500);
         return 'bar';
     }
-    @Action('throwable')
+    @Action()
     public async throwable(): Promise<void> {
         await sleep(500);
         throw new Error('Test error');
     }
-    @Action('echo')
+    @Action()
     public async echo(message: string): Promise<string> {
         return message;
     }

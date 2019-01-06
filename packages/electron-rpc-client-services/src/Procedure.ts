@@ -1,16 +1,37 @@
 import { EnvelopeType } from 'electron-rpc-types';
 
-import { ServiceRepository } from './ServiceRepository';
+import { RPC_SERVICE_METHODS_NAMES } from './internalConstants';
 
-export const Procedure = (rpcName: string, type: EnvelopeType = EnvelopeType.BLOCKING): MethodDecorator => (
+export interface ServiceProcedure<A extends any[] = any[], R = any> {
+    (...args: A): Promise<R>;
+}
+
+export interface ProcedureInfo {
+    rpcName: string;
+    type: EnvelopeType;
+}
+
+export type ProcedureInfoMap = Map<string | symbol, ProcedureInfo>;
+
+export const Procedure = (procedureName?: string, type: EnvelopeType = EnvelopeType.BLOCKING): PropertyDecorator => (
     target: any,
     originName: string | symbol,
-    descriptor: PropertyDescriptor,
-): PropertyDescriptor => {
-    const fn: Function = descriptor.value;
-    if (typeof fn !== 'function') {
-        throw new Error(`@Procedure() decorator can be applied only to methods, not "${typeof fn}"`);
+): void => {
+    if (!Reflect.hasOwnMetadata(RPC_SERVICE_METHODS_NAMES, target)) {
+        Reflect.defineMetadata(RPC_SERVICE_METHODS_NAMES, new Map<string | symbol, ProcedureInfo>(), target);
     }
-    ServiceRepository.getInstance().addProcedure({ rpcName, originName, type }, target.constructor);
-    return descriptor;
+    const methodsNames: ProcedureInfoMap = Reflect.getMetadata(RPC_SERVICE_METHODS_NAMES, target);
+
+    if (methodsNames.has(originName)) {
+        throw new Error(`"@Procedure() decorator can't be applied twice`);
+    }
+
+    let rpcName: string;
+    if (procedureName) {
+        rpcName = procedureName;
+    } else {
+        rpcName = String(originName);
+    }
+
+    methodsNames.set(originName, { rpcName, type });
 };

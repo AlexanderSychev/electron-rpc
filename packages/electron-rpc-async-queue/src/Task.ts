@@ -1,4 +1,4 @@
-import * as EventEmitter from 'micro-events';
+import EventEmitter from 'micro-events';
 
 import { TaskBody } from './TaskBody';
 import { TaskEventType } from './TaskEventType';
@@ -10,7 +10,7 @@ export class Task<A extends any[] = any[], R = any> extends EventEmitter {
     /** Task body arguments */
     private args: A;
     /** @constructor */
-    public constructor(body: TaskBody, ...args: A) {
+    public constructor(body: TaskBody<A, R>, ...args: A) {
         super();
         this.body = body;
         this.args = args;

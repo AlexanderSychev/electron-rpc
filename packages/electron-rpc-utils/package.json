@@ -1,28 +1,28 @@
 {
-  "name": "electron-rpc-utils",
-  "author": "Alexander Sychev",
-  "keywords": [
-    "electron",
-    "electron-rpc",
-    "rpc",
-    "electron-ipc",
-    "ipc",
-    "electron-rpc-utils",
-    "rpc-utils",
-    "ipc-utils",
-    "utils"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:AlexanderSychev/electron-rpc.git"
-  },
-  "description": "Utilities for Electron RPC library",
-  "version": "1.1.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "license": "MIT",
-  "dependencies": {
-    "electron-rpc-types": "^1.1.0",
-    "tslib": "1.9.3"
-  }
+    "name": "electron-rpc-utils",
+    "author": "Alexander Sychev",
+    "keywords": [
+        "electron",
+        "electron-rpc",
+        "rpc",
+        "electron-ipc",
+        "ipc",
+        "electron-rpc-utils",
+        "rpc-utils",
+        "ipc-utils",
+        "utils"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:AlexanderSychev/electron-rpc.git"
+    },
+    "description": "Utilities for Electron RPC library",
+    "version": "1.1.0",
+    "main": "dist/index.js",
+    "types": "src/index.ts",
+    "license": "MIT",
+    "dependencies": {
+        "electron-rpc-types": "^1.1.0",
+        "tslib": "1.9.3"
+    }
 }

@@ -8,6 +8,7 @@ export class ClientController {
     public constructor(logs: Logs) {
         this.logs = logs;
     }
+
     @Action('getLogsOutput')
     public getLogsOutput(): string {
         return this.logs.output;
