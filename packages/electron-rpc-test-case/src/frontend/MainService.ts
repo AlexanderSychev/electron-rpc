@@ -15,5 +15,5 @@ export class MainService {
     public throwable!: ServiceProcedure<[], void>;
 
     @Procedure('echo', EnvelopeType.NONBLOCKING)
-    public echo!: ServiceProcedure<[string], void>;
+    public echo!: ServiceProcedure<[string], string>;
 }

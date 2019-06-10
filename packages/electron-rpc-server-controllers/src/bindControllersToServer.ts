@@ -14,17 +14,22 @@ export function bindControllersToServer(server: Server, classesWithArgs: (Contro
 
         if (Reflect.hasOwnMetadata(RPC_CONTROLLER_NAME, ctor.prototype)) {
             const controllerName: string = Reflect.getMetadata(RPC_CONTROLLER_NAME, ctor.prototype);
-            const controllersMethods: [string, string][] = Object.keys(ctor.prototype)
+            const prototypeKeys = [
+                ...Object.getOwnPropertyNames(ctor.prototype),
+                ...Object.getOwnPropertySymbols(ctor.prototype),
+            ];
+            const controllersMethods: [string, string | symbol][] = prototypeKeys
                 .filter(key => Reflect.hasOwnMetadata(RPC_CONTROLLER_ACTION_NAME, ctor.prototype[key]))
                 .map(
-                    (key): [string, string] => [
+                    (key): [string, string | symbol] => [
                         Reflect.getMetadata(RPC_CONTROLLER_ACTION_NAME, ctor.prototype[key]),
                         key,
                     ],
                 );
             const controller = new (<Newable>ctor)(...args);
             for (const [actionName, methodName] of controllersMethods) {
-                resolver[getControllerMethodName(controllerName, actionName)] = controller[methodName].bind(controller);
+                resolver[getControllerMethodName(controllerName, actionName)] = (...args: any[]) =>
+                    controller[methodName](...args);
             }
         }
     }
