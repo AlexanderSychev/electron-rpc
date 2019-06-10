@@ -2,4 +2,4 @@
 
 Async tasks queue implementation for Electron RPC packages, but may be used for anything else.
 
-See [wiki](https://github.com/AlexanderSychev/electron-rpc/wiki/Electron-RPC-Async-Queue) for details.
+See [wiki](https://alexandersychev.github.io/electron-rpc-wiki/#/api/electron-rpc-async-queue) for details.

@@ -2,6 +2,7 @@
     "name": "electron-rpc-async-queue",
     "author": "Alexander Sychev",
     "description": "Async queue implementation for Electron RPC",
+    "homepage": "https://alexandersychev.github.io/electron-rpc-wiki/#/api/electron-rpc-async-queue",
     "keywords": [
         "electron",
         "electron-rpc",
@@ -11,9 +12,7 @@
         "electron-rpc-async-queue",
         "rpc-async-queue",
         "ipc-async-queue",
-        "async-queue",
-        "typings",
-        "typescript"
+        "async-queue"
     ],
     "repository": {
         "type": "git",

@@ -2,4 +2,4 @@
 
 Utilities package for Electron RPC.
 
-See project [wiki](https://github.com/AlexanderSychev/electron-rpc/wiki/Electron-RPC-Utilities) for details
+See project [wiki](https://alexandersychev.github.io/electron-rpc-wiki/#/api/electron-rpc-utils) for details

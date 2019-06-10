@@ -2,4 +2,4 @@
 
 Common types for Electron RPC packages.
 
-See project [wiki](https://github.com/AlexanderSychev/electron-rpc/wiki/Electron-RPC-Types)
+See project [wiki](https://alexandersychev.github.io/electron-rpc-wiki/#/api/electron-rpc-types)

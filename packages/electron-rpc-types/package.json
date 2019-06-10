@@ -2,6 +2,7 @@
   "name": "electron-rpc-types",
   "author": "Alexander Sychev",
   "description": "Common TypeScript types for Electron RPC packages",
+  "homepage": "https://alexandersychev.github.io/electron-rpc-wiki/#/api/electron-rpc-types",
   "keywords": [
     "electron",
     "electron-rpc",

@@ -2,6 +2,7 @@
   "name": "electron-rpc",
   "author": "Alexander Sychev",
   "description": "Remote Procedure Call (RPC) Protocol for Electron IPC",
+  "homepage": "https://alexandersychev.github.io/electron-rpc-wiki/",
   "private": true,
   "keywords": ["electron", "electron-rpc", "rpc", "electron-ipc", "ipc"],
   "repository": {
@@ -11,7 +12,6 @@
   "scripts": {
     "build": "make",
     "start": "electron ./packages/electron-rpc-test-case",
-    "docs": "static-server -p 8000",
     "async-queue": "make async-queue",
     "utils": "make utils",
     "client": "make client",

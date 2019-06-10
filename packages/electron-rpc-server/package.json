@@ -2,6 +2,7 @@
     "name": "electron-rpc-server",
     "author": "Alexander Sychev",
     "description": "Electron RPC Server",
+    "homepage": "https://alexandersychev.github.io/electron-rpc-wiki/#/api/electron-rpc-server",
     "keywords": [
         "electron",
         "electron-rpc",

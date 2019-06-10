@@ -1,6 +1,7 @@
 {
     "name": "electron-rpc-client",
     "author": "Alexander Sychev",
+    "homepage": "https://alexandersychev.github.io/electron-rpc-wiki/#/api/electron-rpc-client",
     "keywords": [
         "electron",
         "electron-rpc",

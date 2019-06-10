@@ -9,9 +9,9 @@
  */
 exports.EnvelopeType = {
     /** Nonblocking (several requests of this type may be executed in parallel) */
-    NONBLOCKING: 'read',
+    NONBLOCKING: 'EnvelopeType.NONBLOCKING',
     /** Blocking (several requests of this type will be executed only in turn) */
-    BLOCKING: 'write'
+    BLOCKING: 'EnvelopeType.BLOCKING'
 }
 
 /**

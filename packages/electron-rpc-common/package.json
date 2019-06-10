@@ -2,6 +2,7 @@
     "name": "electron-rpc-common",
     "author": "Alexander Sychev",
     "description": "Electron RPC implementation",
+    "homepage": "https://alexandersychev.github.io/electron-rpc-wiki/#/api/electron-rpc-common",
     "keywords": [
         "electron",
         "electron-rpc",

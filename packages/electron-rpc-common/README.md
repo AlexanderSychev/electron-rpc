@@ -2,4 +2,4 @@
 
 Common Electron RPC package which provides all utilities, types, server and client services.
 
-See project [wiki](https://github.com/AlexanderSychev/electron-rpc/wiki/Electron-RPC-Common) for details
+See project [wiki](https://alexandersychev.github.io/electron-rpc-wiki/#/api/electron-rpc-common) for details

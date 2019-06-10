@@ -2,4 +2,4 @@
 
 RPC Server service for Electron RPC
 
-See project [wiki](https://github.com/AlexanderSychev/electron-rpc/wiki/Electron-RPC-Server) for details
+See project [wiki](https://alexandersychev.github.io/electron-rpc-wiki/#/api/electron-rpc-server) for details

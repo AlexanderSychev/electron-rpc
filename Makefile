@@ -1,7 +1,7 @@
 PACKAGE_DIR_PREFIX = ./packages/electron-rpc-
 TO_ROOT = cd ../..
 
-.PHONY: all async-queue utils client server server-controllers client-services common
+.PHONY: all async-queue utils client server server-controllers client-services common test-case
 
 all: utils async-queue server client server-controllers client-services common test-case
 
