@@ -20,10 +20,10 @@
     },
     "dependencies": {
         "@types/micro-events": "1.0.0",
-        "micro-events": "1.0.0",
-        "electron-rpc-types": "1.1.0"
+        "electron-rpc-types": "^1.2.0",
+        "micro-events": "1.0.0"
     },
-    "version": "1.1.0",
+    "version": "1.2.0",
     "main": "dist/index.js",
     "types": "src/index.ts",
     "license": "MIT"
